@@ -17,10 +17,14 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheckPos;
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f);
     public LayerMask groundLayer;
+
+    public CollectablesManager cm;
+
+    public float ScaleValue = 3;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        ScaleValue = transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -64,5 +68,19 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.white;  
         Gizmos.DrawCube(groundCheckPos.position, groundCheckSize);
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Shrinker"))
+        {
+            ScaleValue = ScaleValue /2;
+            transform.localScale = new Vector3(ScaleValue, ScaleValue, ScaleValue);
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            cm.collectableCounter++;
+        }
     }
 }

@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
 
     public CollectablesManager cm;
 
+    public float timeBonus = 2f;
+    public TimerManager timerManager;
+
     public float ScaleValue = 3;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Coin"))
         {
+            timerManager.AddTime();
             Destroy(other.gameObject);
             cm.collectableCounter++;
         }

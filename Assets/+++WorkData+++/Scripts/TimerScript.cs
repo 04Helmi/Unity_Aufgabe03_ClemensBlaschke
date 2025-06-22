@@ -1,26 +1,30 @@
 
 using TMPro;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class TimerManager : MonoBehaviour
 {
-    public float timeRemaining = 50f; // Starttime
+    public float timeRemaining = 60f; // Starttime
     // Reference to a UI Text
-    public TextMeshProUGUI timerText;           
+    public TextMeshProUGUI timerText;  
+    
+    public UIManager uiManager;
 
     void Update()
     {
         // Count down
-        if (timeRemaining > 0)
+        if (timeRemaining >= 0)
         {
             timeRemaining -= Time.deltaTime;
             UpdateTimerUI();
         }
         else
         {
-            timeRemaining = 0;
+          
             // possible lose
+            TimeUp();
         }
     }
 
@@ -33,5 +37,14 @@ public class TimerManager : MonoBehaviour
     void UpdateTimerUI()
     {
         timerText.text = Mathf.Ceil(timeRemaining).ToString();
+    }
+    void TimeUp()
+    {
+       
+       
+        
+          uiManager.ShowLosePanel();
+        
+
     }
 }

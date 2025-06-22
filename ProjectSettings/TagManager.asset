@@ -8,6 +8,7 @@ TagManager:
   - New tag
   - Shrinker
   - Coin
+  - WinArea
   layers:
   - Default
   - TransparentFX
